@@ -442,7 +442,7 @@ def delete_rere(reid):
 @app.route('/insert_rent', methods=['POST'])
 def insert_rent():
     if request.method == "POST":
-        flash("Data Inserted Successfully")
+        flash("Data has Inserted Successfully")
 
         tenantid = request.form['Tenant_ID']
         tenantname = request.form['Tenant_name']
