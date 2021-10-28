@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-
+        scale=1">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/homestyle.css')}}">
+         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+     <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    </head>
+    <body class="bgi">
+
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg3-nav">
+  <div class="container">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <h4 class="text-light" style="font-size:20px">Apartment Management System </h4>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-light" href="/ghome">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/gapartment">Apartment</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link text-light" href="/profile">Profile</a>
+      </li>
+
+       <li class="nav-item">
+        <a class="nav-link text-light" href="/payrent">Rent</a>
+       </li>
+    </ul>
+
+  </div>
+  </div>
+</nav><br><br><br>
+
+    <div class="container" style="margin:auto;max-width:400px">
+        <div class="row">
+            <div class="col-md-12">
+        <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ url_for('static', filename='image/icon.png')}}">
+            <div class="media-body">
+          <h2 class="account-heading">{{t.1}}</h2>
+          <p class="text-secondary">{{t.4}}</p>
+        </div>
+      </div>
+        </div>
+                 <div class="card">
+          <div class="card-body">
+
+              <label>Tenant_ID  : {{t.0}} </label><br>
+              <label >Tenant name  : {{t.1}}</label><br>
+              <label >Apartment_no  :{{t.2}} </label><br>
+
+              <label >Address   : {{t.3}}</label><br>
+              <label >Email  : {{t.4}}</label><br>
+              <label >Phone number  : {{t.5}}</label><br>
+                </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+     <script src="static/js/jQuery.js"></script>
+       <script src="static/js/bootstrap.min.js"></script>
+    </body>
+</html>

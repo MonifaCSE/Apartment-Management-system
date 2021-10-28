@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+
+       <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <title>Login</title>
+  </head>
+  <body class="bg-nav">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg3-nav">
+  <div class="container">
+
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <h4 class="text-light" style="font-size:20px">Apartment Management System </h4>
+
+      </div>
+      </div>
+  </nav>
+  <div class="container">
+   <div class="row">
+
+             <div>
+                  <img src="{{ url_for('static', filename='image/apart4.jpg')}} ">
+             </div>
+       <div class="col-md-5"><br>
+
+      <div class="card mt-100">
+          <div class="card-body">
+
+              <form class="form1" method="post" action="/login_validation">
+                  <h3>Login</h3><br><br>
+
+                  <input required type="text" placeholder="Username" class="form-control" name="username"> <br><br>
+                  <input required type="password" placeholder="Password" class="form-control" name="password"><br><br>
+
+                  <input type="submit" class="btn btn-primary btn-lg btn-block" value="Sign in">
+              </form>
+              <p class="mt-2">Don't have an account? <a href="/register">Create Account</a></p>
+
+          </div>
+      </div>
+       </div>
+       </div>
+
+  </div>
+       <script src="static/js/jQuery.js"></script>
+       <script src="static/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

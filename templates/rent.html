@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+     <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <title>Rent Details</title>
+</head>
+<body class="bg5">
+
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg3-nav">
+  <div class="container">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <h4 class="text-light" style="font-size:20px">Apartment Management System </h4>
+    <ul class="navbar-nav ml-auto">
+       <li class="nav-item active">
+        <a class="nav-link text-light" href="/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/apartment">Apartment</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link text-light" href="/request">Request</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link text-light" href="/tenant">Tenant</a>
+      </li>
+
+       <li class="nav-item">
+        <a class="nav-link text-light" href="/rent">Rent</a>
+       </li>
+
+        <li class="nav-item">
+        <a class="nav-link text-light" href="/aprofile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/logout">Logout</a>
+      </li>
+    </ul>
+
+  </div>
+  </div>
+</nav><br><br><br>
+{% block body %}
+     <div class="container">
+        <div class="row">
+            <div class="col md-2">
+                <h5>Rent Details <a class="btn btn-success float-right" style="margin:5px;" href="/rent_request" role="button">Collect Rent</a> <button type="button" class="btn btn-danger float-right"  style="margin:5px;" data-toggle="modal" data-target="#mymodal">Add Rent</button> </h5><br>
+
+             {%with messages = get_flashed_messages() %}
+             {%if messages%}
+             {%for message in messages%}
+              <div class="alert alert-success alert-dismissable" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                      <span aria-hidden="true">x</span>
+                  </button>
+                  {{message}}
+              </div>
+
+             {%endfor%}
+             {%endif%}
+             {%endwith%}
+           <div class="table-responsive-sm">
+            <table class="table table-sm thead-light table-hover table-striped">
+             <tr>
+                <th>Rent_id</th>
+               <th>Tenant_id</th>
+               <th>Tenant_name</th>
+                 <th>Apartment_no</th>
+
+                 <th>Paid_Date</th>
+                 <th>Payment</th>
+                  <th>Transaction_no</th>
+                 <th>Month</th>
+
+
+                 <th>Action</th>
+             </tr>
+
+              {%for data in rent%}
+              <tr>
+                    <td>{{data.0}}</td>
+                    <td>{{data.1}}</td>
+                    <td>{{data.2}}</td>
+                    <td>{{data.3}}</td>
+                    <td>{{data.4}}</td>
+                  <td>{{data.5}}</td>
+                  <td>{{data.6}}</td>
+                  <td>{{data.7}}</td>
+
+
+              <td>
+                 <a href="/update/{{data.0}}" class="btn btn-light btn-xs" data-toggle="modal" data-target="#modaledit{{data.0}}">Edit</a>
+                  <a href="/delete_rent/{{data.0}}" class="btn btn-dark btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
+              </td>
+              </tr>
+
+
+             <div id="modaledit{{data.0}}" class="modal fade" role="dialog">
+
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                        <h6 class="modal-title">Please Update Data</h6>
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                   </div>
+                   <div class="modal-body">
+                       <form  action="/update_rent" method="POST">
+
+                            <div class="form-group">
+                                 <input type="hidden" class="form-control"  name="Rent_id" value="{{data.0}}">
+                           </div>
+                            <div class="form-group">
+
+                               <input type="text" placeholder="Tenant_ID" class="form-control" name="Tenant_ID"  value="{{data.1}}">
+                           </div>
+                           <div class="form-group">
+
+                               <input type="text" placeholder="Tenant_name" class="form-control" name="Tenant_name"  value="{{data.2}}">
+                           </div>
+
+                               <div class="form-group">
+
+                               <input type="number" placeholder="Apartment_no" class="form-control" name="Apartment_no" value="{{data.3}}" >
+                           </div>
+
+
+                          <div class="form-group">
+                               <input type="date" placeholder="Paid_Date" class="form-control" name="Paid_Date" value="{{data.4}}" >
+                           </div>
+
+                            <div class="form-group">
+
+                               <input type="number" placeholder="Paid_amount" class="form-control" name="Paid_amount"  value="{{data.5}}">
+                           </div>
+                            <div class="form-group">
+
+                               <input type="text" placeholder="Transection_no" class="form-control" name="Transection_no" value="{{data.6}}">
+                           </div>
+
+                           <div class="form-group">
+                               <input type="month" placeholder="Month Of Rent" class="form-control" name="Month" value="{{data.7}}">
+                           </div>
+
+
+                            <div class="form-group">
+                              <button class="btn btn-primary" type="submit">Update</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           </div>
+
+
+
+                       </form>
+
+                   </div>
+
+               </div>
+           </div>
+       </div>
+        {%endfor%}
+         </table>
+           </div>
+            </div>
+
+        </div>
+
+       <div id="mymodal" class="modal fade" role="dialog">
+
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                        <h6 class="modal-title">Please insert Data</h6>
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                   </div>
+                   <div class="modal-body">
+                       <form  action="/insert_rent" method="POST">
+
+                           <div class="form-group">
+                               <input type="text" placeholder="Tenant_ID" class="form-control" name="Tenant_ID" required="1">
+                           </div>
+                           <div class="form-group">
+                               <input type="text" placeholder="Tenant_name" class="form-control" name="Tenant_name" required="1">
+                           </div>
+                           <div class="form-group">
+                               <div class="form-group">
+
+                               <input type="number" placeholder="Apartment_no" class="form-control" name="Apartment_no" required="1" >
+                           </div>
+
+                               <input type="date" placeholder="Paid_Date" class="form-control" name="Paid_Date" required="1" >
+                           </div>
+
+                           <div class="form-group">
+
+                               <input type="number" placeholder="Paid_amount" class="form-control" name="Paid_amount" required="1">
+                           </div>
+                           <div class="form-group">
+
+                               <input type="text" placeholder="Transection_no" class="form-control" name="Transection_no" required="1">
+                           </div>
+
+                           <div class="form-group">
+                               <input type="month" placeholder="Month" class="form-control" name="Month" required="1">
+                           </div>
+
+                            <div class="form-group">
+                              <button class="btn btn-primary" type="submit">Insert</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           </div>
+
+
+
+                       </form>
+
+                   </div>
+
+
+               </div>
+           </div>
+       </div>
+    </div>
+
+{% endblock %}
+
+      <script src="static/js/jQuery.js"></script>
+       <script src="static/js/bootstrap.min.js"></script>
+</body>
+</html>
